@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.29.47.4906",
-      "templateHash": "1552408556920290324"
+      "templateHash": "3452335055827181312"
     },
     "name": "Test AVM module as to create session host for replacer"
   },
@@ -915,7 +915,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.29.47.4906",
-              "templateHash": "10450971383264069871"
+              "templateHash": "13210863869826966557"
             }
           },
           "parameters": {
@@ -1232,7 +1232,7 @@
                   "adminPassword": {
                     "reference": {
                       "keyVault": {
-                        "id": "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('serviceObjectsRgName')), 'Microsoft.KeyVault/vaults', parameters('wrklKvName'))]"
+                        "id": "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', format('{0}', parameters('subscriptionId')), format('{0}', parameters('serviceObjectsRgName'))), 'Microsoft.KeyVault/vaults', parameters('wrklKvName'))]"
                       },
                       "secretName": "vmLocalUserPassword"
                     }
@@ -1250,7 +1250,7 @@
                   "extensionDomainJoinPassword": {
                     "reference": {
                       "keyVault": {
-                        "id": "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('serviceObjectsRgName')), 'Microsoft.KeyVault/vaults', parameters('wrklKvName'))]"
+                        "id": "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', format('{0}', parameters('subscriptionId')), format('{0}', parameters('serviceObjectsRgName'))), 'Microsoft.KeyVault/vaults', parameters('wrklKvName'))]"
                       },
                       "secretName": "domainJoinUserPassword"
                     }
@@ -4900,7 +4900,8 @@
               "type": "Microsoft.Resources/deployments",
               "apiVersion": "2022-09-01",
               "name": "[format('SH-Antimal-{0}-{1}', parameters('vmName'), parameters('time'))]",
-              "resourceGroup": "[parameters('computeObjectsRgName')]",
+              "subscriptionId": "[format('{0}', parameters('subscriptionId'))]",
+              "resourceGroup": "[format('{0}', parameters('computeObjectsRgName'))]",
               "properties": {
                 "expressionEvaluationOptions": {
                   "scope": "inner"
@@ -5115,7 +5116,8 @@
               "type": "Microsoft.Resources/deployments",
               "apiVersion": "2022-09-01",
               "name": "[format('SH-Mon-{0}-{1}', parameters('vmName'), parameters('time'))]",
-              "resourceGroup": "[parameters('computeObjectsRgName')]",
+              "subscriptionId": "[format('{0}', parameters('subscriptionId'))]",
+              "resourceGroup": "[format('{0}', parameters('computeObjectsRgName'))]",
               "properties": {
                 "expressionEvaluationOptions": {
                   "scope": "inner"
@@ -5319,14 +5321,15 @@
                 }
               },
               "dependsOn": [
-                "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('computeObjectsRgName')), 'Microsoft.Resources/deployments', format('SH-Antimal-{0}-{1}', parameters('vmName'), parameters('time')))]"
+                "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', format('{0}', parameters('subscriptionId')), format('{0}', parameters('computeObjectsRgName'))), 'Microsoft.Resources/deployments', format('SH-Antimal-{0}-{1}', parameters('vmName'), parameters('time')))]"
               ]
             },
             {
               "type": "Microsoft.Resources/deployments",
               "apiVersion": "2022-09-01",
               "name": "[format('DCR-Asso-{0}-{1}', parameters('vmName'), parameters('time'))]",
-              "resourceGroup": "[parameters('computeObjectsRgName')]",
+              "subscriptionId": "[format('{0}', parameters('subscriptionId'))]",
+              "resourceGroup": "[format('{0}', parameters('computeObjectsRgName'))]",
               "properties": {
                 "expressionEvaluationOptions": {
                   "scope": "inner"
@@ -5379,15 +5382,16 @@
                 }
               },
               "dependsOn": [
-                "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('computeObjectsRgName')), 'Microsoft.Resources/deployments', format('SH-Mon-{0}-{1}', parameters('vmName'), parameters('time')))]",
-                "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('computeObjectsRgName')), 'Microsoft.Resources/deployments', format('SH-Antimal-{0}-{1}', parameters('vmName'), parameters('time')))]"
+                "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', format('{0}', parameters('subscriptionId')), format('{0}', parameters('computeObjectsRgName'))), 'Microsoft.Resources/deployments', format('SH-Mon-{0}-{1}', parameters('vmName'), parameters('time')))]",
+                "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', format('{0}', parameters('subscriptionId')), format('{0}', parameters('computeObjectsRgName'))), 'Microsoft.Resources/deployments', format('SH-Antimal-{0}-{1}', parameters('vmName'), parameters('time')))]"
               ]
             },
             {
               "type": "Microsoft.Resources/deployments",
               "apiVersion": "2022-09-01",
               "name": "[format('SH-Config-{0}-{1}', parameters('vmName'), parameters('time'))]",
-              "resourceGroup": "[parameters('computeObjectsRgName')]",
+              "subscriptionId": "[format('{0}', parameters('subscriptionId'))]",
+              "resourceGroup": "[format('{0}', parameters('computeObjectsRgName'))]",
               "properties": {
                 "expressionEvaluationOptions": {
                   "scope": "inner"
@@ -5558,7 +5562,7 @@
                 }
               },
               "dependsOn": [
-                "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('computeObjectsRgName')), 'Microsoft.Resources/deployments', format('SH-Mon-{0}-{1}', parameters('vmName'), parameters('time')))]",
+                "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', format('{0}', parameters('subscriptionId')), format('{0}', parameters('computeObjectsRgName'))), 'Microsoft.Resources/deployments', format('SH-Mon-{0}-{1}', parameters('vmName'), parameters('time')))]",
                 "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('computeObjectsRgName')), 'Microsoft.Resources/deployments', format('SH-module-{0}-{1}', parameters('vmName'), parameters('time')))]"
               ]
             }
